@@ -50,10 +50,11 @@ jobs:
     - name: prepare
       run: |
         bash ./scripts/prepare.sh
-    - name: Get Architecture
+- name: Get Architecture
       working-directory: ${{ github.workspace }}/openwrt
       run: |
-        LAST_COMMIT_HASH=$(curl -s "https://api.github.com/repos/AgustinLorenzo/openwrt/commits/main_nss" | grep -m 1 '"sha":' | cut -d '"' -f 4 | cut -c 1-7)
+        # 更改为robimarko的IPQ807x分支，通常为ipq807x-5.15-pr或更高版本
+        LAST_COMMIT_HASH=$(curl -s "https://api.github.com/repos/robimarko/openwrt/commits/ipq807x-5.15-pr" | grep -m 1 '"sha":' | cut -d '"' -f 4 | cut -c 1-7)
         echo "LAST_COMMIT_HASH=${LAST_COMMIT_HASH}" >> $GITHUB_ENV
         tag_name=$(date +%Y%m%d-%H%M)
         echo "tag_name=${tag_name}" >>$GITHUB_ENV
